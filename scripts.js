@@ -13,21 +13,61 @@
 // function onPageLoad() {
 //   retrieveLocally();
 // }
+
+
+
+$('.save-idea').on('click', function () {
+  storeLocally(updateCardArray(getStorage(), addCard()));
+  // clearInputFields();
+  prependCard(addCard());
+});
+
+function Idea(title, body) {
+  this.title = title;
+  this.body = body;
+  this.id = Date.now();
+  this.quality = 'quality: swill';
+}
 //
-// $('.save-idea').on('click', function () {
-//   var $title = $('.title-storage').val();
-//   var $body = $('.body-storage').val();
-//   var $id = Date.now();
-//   var $newIdea = new Idea($title, $body, $id);
-//   clearInputFields();
-//   storeLocally($newIdea, $id);
-//   prependIdea($newIdea);
-// });
-//
+addCard = function() {
+var $title = $('.title-storage').val();
+var $body = $('.body-storage').val()
+return idea = new Idea($title, $body)
+}
+
+function prependCard(addCard) {
+  $('.idea-container').prepend(
+    `<article class="idea-card" id=
+  ${idea.id}>
+      <div class="card-header">
+        <h2 contenteditable="true">${idea.title}</h2>
+        <button class="delete-icon" type="button" name="delete-button"></button>
+      </div>
+      <p class="body-text" contenteditable="true">${idea.body}</p>
+      <div class="quality-container">
+        <button class="upvote-icon" type="button" name="upvote-btn"></button>
+        <button class="downvote-icon" type="button" name="downvote-btn"></button>
+        <p class="quality-text">${idea.quality}</p>
+      </div>
+    </article>`
+  );
+}
+
 // function storeLocally(Idea, id) {
-//   var stringifiedIdea = JSON.stringify(Idea);
-//   localStorage.setItem(id, stringifiedIdea);
-// }
+
+function getStorage() {
+  var getItem = localStorage.getItem('key') || '[]'
+  return JSON.parse(getItem)
+}
+
+function updateCardArray(getStorage, addCard) {
+  return getStorage.push(addCard);
+}
+
+function storeLocally(updateCardArray) {
+  var stringifiedArray = JSON.stringify(updateCardArray);
+  localStorage.setItem('key', stringifiedArray);
+}
 //
 // function retrieveLocally() {
 //   var retrievedObject;
@@ -63,36 +103,7 @@
 //   $('.save-idea').prop('disabled', value);
 // }
 //
-function Idea(title, body) {
-  this.title = title;
-  this.body = body;
-  this.id = Date.now();
-  this.quality = 'quality: swill';
-}
-//
-addCard = function() {
-var $title = $('.title-storage').val();
-var $body = $('.body-storage').val()
-return idea = new Idea($title, $body)
-}
 
-function prependIdea(addCard) {
-  $('.idea-container').prepend(
-    `<article class="idea-card" id=
-  ${idea.id}>
-      <div class="card-header">
-        <h2 contenteditable="true">${idea.title}</h2>
-        <button class="delete-icon" type="button" name="delete-button"></button>
-      </div>
-      <p class="body-text" contenteditable="true">${idea.body}</p>
-      <div class="quality-container">
-        <button class="upvote-icon" type="button" name="upvote-btn"></button>
-        <button class="downvote-icon" type="button" name="downvote-btn"></button>
-        <p class="quality-text">${idea.quality}</p>
-      </div>
-    </article>`
-  );
-}
 //
 // $('.idea-container').on('click', '.upvote-icon', function () {
 //   var $qualityElement = $(this).parent().find('.quality-text');
