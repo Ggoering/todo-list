@@ -99,6 +99,7 @@ main {
 }
 
 article {
+  position: relative;
   width: 275px;
   border-bottom: 1px solid #D1D3D4;
   -webkit-transition: 1s;
@@ -148,6 +149,7 @@ img {
 
 .quality-text {
   color: #6D6E71;
+  line-height: 25px;
 }
 
 .upvote-icon,
@@ -199,6 +201,18 @@ img {
 
 button:focus {
   outline: 0;
+}
+
+.check-item {
+position: absolute;
+right: 0px;
+bottom: 6px;
+}
+
+.complete {
+  width: 120px;
+  height: 40px;
+  margin: 0;
 }
 
 @media(min-width: 600px) {
