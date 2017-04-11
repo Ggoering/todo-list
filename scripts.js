@@ -139,3 +139,20 @@ var tempArray = getStorage
 function clearCards() {
   $('.card-container').html('')
 }
+
+function deleteCard(getStorage, $cardID, $card) {
+  var newArray = getStorage
+  newArray.forEach(function(element, index, array) {
+    if (element.id == $cardID) {
+      array.splice(element)
+    }
+  })
+  $($card).remove()
+  return newArray;
+}
+
+$('.card-container').on('click', '.delete-icon', function() {
+  var $cardID = $(this).closest('.todo-card').attr('id')
+  var $card = $(this).closest('.todo-card')
+  storeLocally(deleteCard(getStorage(), $cardID, $card))
+})
