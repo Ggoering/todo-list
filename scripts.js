@@ -117,7 +117,6 @@ return tempArray
 $('.card-container').on('click', '.downvote-icon', function() {
   var $cardID = $(this).closest('.todo-card').attr('id')
   var $upBtn = $(this)
-  console.log('event listener working');
   storeLocally(decreaseImportanceArray(getStorage(), $cardID))
   clearCards()
   appendFromArray(getStorage())
@@ -126,17 +125,16 @@ $('.card-container').on('click', '.downvote-icon', function() {
 
 function decreaseImportanceArray(getStorage, $cardID) {
 var tempArray = getStorage
-for (var i = 0; i < tempArray.length; i++) {
-while ($cardID == tempArray[i].id && tempArray[i].importanceLevel > 0){
- tempArray[i].importanceLevel--
- tempArray[i].importance = tempArray[i].importanceArray[tempArray[i].importanceLevel]
- break
- }
- continue
+  for (var i = 0; i < tempArray.length; i++) {
+    while ($cardID == tempArray[i].id && tempArray[i].importanceLevel > 0){
+      tempArray[i].importanceLevel--
+      tempArray[i].importance = tempArray[i].importanceArray[tempArray[i].importanceLevel]
+      break
+      }
+    continue
+    }
+  return tempArray
 }
-return tempArray
-}
-
 
 function clearCards() {
   $('.card-container').html('')
