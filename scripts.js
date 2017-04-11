@@ -1,25 +1,19 @@
-// var keyArray = [];
-//
-// updatedKeyArray();
-// onPageLoad();
-//
-// function updatedKeyArray() {
-//   for (var i = 0; i < localStorage.length; i++) {
-//     var key = localStorage.key(i);
-//     keyArray.push(key);
-//   }
-// }
-//
-// function onPageLoad() {
-//   retrieveLocally();
-// }
+onPageLoad()
 
+function onPageLoad() {
+  appendFromArray(getStorage())
+}
 
+function appendFromArray(getStorage) {
+  getStorage.forEach(function (element) {
+    prependCard(element)
+  })
+  }
 
 $('.save-idea').on('click', function () {
   storeLocally(updateCardArray(getStorage(), addCard()));
-  // clearInputFields();
   prependCard(addCard());
+    // clearInputFields();
 });
 
 function Idea(title, body) {
@@ -28,47 +22,48 @@ function Idea(title, body) {
   this.id = Date.now();
   this.quality = 'quality: swill';
 }
-//
+
 addCard = function() {
 var $title = $('.title-storage').val();
 var $body = $('.body-storage').val()
-return idea = new Idea($title, $body)
+var idea = new Idea($title, $body)
+return idea
 }
 
 function prependCard(addCard) {
   $('.idea-container').prepend(
-    `<article class="idea-card" id=
-  ${idea.id}>
+    `<article class="idea-card" id=${addCard.id}>
       <div class="card-header">
-        <h2 contenteditable="true">${idea.title}</h2>
+        <h2 contenteditable="true">${addCard.title}</h2>
         <button class="delete-icon" type="button" name="delete-button"></button>
       </div>
-      <p class="body-text" contenteditable="true">${idea.body}</p>
+      <p class="body-text" contenteditable="true">${addCard.body}</p>
       <div class="quality-container">
         <button class="upvote-icon" type="button" name="upvote-btn"></button>
         <button class="downvote-icon" type="button" name="downvote-btn"></button>
-        <p class="quality-text">${idea.quality}</p>
+        <p class="quality-text">${addCard.quality}</p>
       </div>
     </article>`
   );
 }
 
-// function storeLocally(Idea, id) {
-
 function getStorage() {
-  var getItem = localStorage.getItem('key') || '[]'
-  return JSON.parse(getItem)
+  var getItem =  localStorage.getItem('key') || '[]'
+  getItem = JSON.parse(getItem)
+  return getItem
 }
 
 function updateCardArray(getStorage, addCard) {
-  return getStorage.push(addCard);
+  var getStorage1 = getStorage
+  getStorage1.push(addCard)
+  return getStorage1
 }
 
 function storeLocally(updateCardArray) {
   var stringifiedArray = JSON.stringify(updateCardArray);
   localStorage.setItem('key', stringifiedArray);
 }
-//
+
 // function retrieveLocally() {
 //   var retrievedObject;
 //   keyArray.forEach(function (key) {
