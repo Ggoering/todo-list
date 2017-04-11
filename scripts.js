@@ -8,12 +8,18 @@ function appendFromArray(getStorage) {
   getStorage.forEach(function (element) {
     prependCard(element)
   })
-  }
+}
 
-$('.save-idea').on('click', function () {
+$('header').on('input', '.body-storage, .title-storage', function() {
+  enableSave();
+})
+
+
+$('.save-btn').on('click', function () {
   storeLocally(updateCardArray(getStorage(), addCard()));
   prependCard(addCard());
-    // clearInputFields();
+  clearInputFields();
+  enableSave()
 });
 
 function Idea(title, body) {
@@ -75,29 +81,27 @@ function storeLocally(updateCardArray) {
 // $('.title-storage').on('input', enableSave);
 // $('.body-storage').on('input', enableSave);
 //
-// function clearInputFields() {
-//   var $title = $('.title-storage');
-//   var $body = $('.body-storage');
-//   $title.val('');
-//   $body.val('');
-//   toggleSaveDisable();
-//   enableSave();
-// }
-//
-// function enableSave() {
-//   var $title = $('.title-storage').val();
-//   var $body = $('.body-storage').val();
-//   if ($title !== '' && $body !== '') {
-//     toggleSaveDisable(false);
-//   } else {
-//     toggleSaveDisable(true);
-//   }
-// }
-//
-// function toggleSaveDisable(value) {
-//   $('.save-idea').prop('disabled', value);
-// }
-//
+function clearInputFields() {
+  $('.title-storage').val('');
+  $('.body-storage').val('');
+  // toggleSaveDisable();
+  // enableSave();
+}
+
+function enableSave() {
+  var $title = $('.title-storage').val();
+  var $body = $('.body-storage').val();
+  if ($title !== '' && $body !== '') {
+    toggleSaveDisable(false);
+  } else {
+    toggleSaveDisable(true);
+  }
+}
+
+function toggleSaveDisable(value) {
+  $('.save-btn').prop('disabled', value);
+}
+
 
 //
 // $('.idea-container').on('click', '.upvote-icon', function () {
