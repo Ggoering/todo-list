@@ -95,27 +95,49 @@ function toggleSaveDisable(value) {
 $('.card-container').on('click', '.upvote-icon', function() {
   var $cardID = $(this).closest('.todo-card').attr('id')
   var $upBtn = $(this)
-storeLocally(IncreaseImportanceArray(getStorage(), $cardID))
-clearCards()
+  console.log('event listener working');
+  storeLocally(increaseImportanceArray(getStorage(), $cardID))
+  clearCards()
   appendFromArray(getStorage())
 })
 
-  function IncreaseImportanceArray(getStorage, $cardID) {
-  var tempArray = getStorage
-  for (i = 0; i < tempArray.length; i++) {
-    if ($cardID == tempArray[i].id){
-      tempArray[i].importanceLevel++
-      tempArray[i].importance = tempArray[i].importanceArray[tempArray[i].importanceLevel]
-      }
-      return tempArray
-    }
+function increaseImportanceArray(getStorage, $cardID) {
+var tempArray = getStorage
+for (var i = 0; i < tempArray.length; i++) {
+ while ($cardID == tempArray[i].id && tempArray[i].importanceLevel < tempArray[i].importanceArray.length - 1){
+  tempArray[i].importanceLevel++
+  tempArray[i].importance = tempArray[i].importanceArray[tempArray[i].importanceLevel]
+  break
   }
+  continue
 }
+return tempArray
+}
+
+$('.card-container').on('click', '.downvote-icon', function() {
+  var $cardID = $(this).closest('.todo-card').attr('id')
+  var $upBtn = $(this)
+  console.log('event listener working');
+  storeLocally(decreaseImportanceArray(getStorage(), $cardID))
+  clearCards()
+  appendFromArray(getStorage())
+})
+
+
+function decreaseImportanceArray(getStorage, $cardID) {
+var tempArray = getStorage
+for (var i = 0; i < tempArray.length; i++) {
+while ($cardID == tempArray[i].id && tempArray[i].importanceLevel > 0){
+ tempArray[i].importanceLevel--
+ tempArray[i].importance = tempArray[i].importanceArray[tempArray[i].importanceLevel]
+ break
+ }
+ continue
+}
+return tempArray
+}
+
 
 function clearCards() {
   $('.card-container').html('')
 }
-
-// function raiseImportance() {
-//   while (i > importanceArray.length -1)
-// }
