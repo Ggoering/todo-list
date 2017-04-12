@@ -254,7 +254,9 @@ font-size: 14px;
   color: #FFFFFF;
 }
 
-
+.toggle-card-disabled {
+  opacity: .4;
+}
 
 @media(min-width: 600px) {
   input,
