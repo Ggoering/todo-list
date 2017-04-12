@@ -268,6 +268,22 @@ font-size: 14px;
   opacity: .4;
 }
 
+@media(max-width: 600px) {
+  .card-container {
+    width: 90%;
+    margin: auto;
+  }
+
+  .todo-card {
+    width: 100%;
+  }
+
+  .card-filter {
+    width: 90%;
+    margin: auto;
+  }
+}
+
 @media(min-width: 600px) {
   input,
   textarea,

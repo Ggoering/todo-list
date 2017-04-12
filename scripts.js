@@ -7,7 +7,7 @@ function appendFromArray(getStorage) {
 }
 
 function getTenFromStorage(getStorage) {
-  var arrayTen = getStorage.slice(0,10);
+  var arrayTen = getStorage.reverse().slice(0,10).reverse();
   return arrayTen
 }
 
@@ -20,8 +20,8 @@ function showCompletedToDos() {
 }
 
 function onPageLoad() {
-  appendFromArray(getTenFromStorage(getStorage()))
-  hideCompletedToDos()
+  appendFromArray(getTenFromStorage(getCardsOnLoad()))
+  // hideCompletedToDos()
 }
 
 
@@ -133,7 +133,7 @@ function upVote() {
   var $upBtn = $(this)
   storeLocally(increaseImportanceArray(getStorage(), $cardID))
   clearCards()
-  appendFromArray(getStorage())
+  appendFromArray(getCardsOnLoad())
 }
 function increaseImportanceArray(getStorage, $cardID) {
 var tempArray = getStorage
@@ -154,7 +154,7 @@ function downVote() {
   var $upBtn = $(this)
   storeLocally(decreaseImportanceArray(getStorage(), $cardID))
   clearCards()
-  appendFromArray(getStorage())
+  appendFromArray(getCardsOnLoad())
 }
 
 function decreaseImportanceArray(getStorage, $cardID) {
@@ -309,3 +309,11 @@ $('main').on('click', '.remove-filters-btn', removeFilters)
     })
     $('.filter-btn').toggleClass('filter-btn-clicked', false)
   }
+
+function getCardsOnLoad() {
+  var cards = getStorage();
+  cards = cards.filter(function(element){
+    return element.completed.indexOf('show') != -1
+  })
+  return cards
+}
