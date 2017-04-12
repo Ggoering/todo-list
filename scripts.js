@@ -10,11 +10,20 @@ function appendFromArray(getStorage) {
 
 function onPageLoad() {
   appendFromArray(getTenFromStorage(getStorage()))
+  hideCompletedToDos()
 }
 
 function getTenFromStorage(getStorage) {
   var arrayTen = getStorage.slice(0,10);
   return arrayTen
+}
+
+function hideCompletedToDos() {
+  $('.toggle-card-disabled').hide()
+}
+
+function showCompletedToDos() {
+  $('.toggle-card-disabled').show()
 }
 
 function disableShowMore() {
@@ -24,7 +33,8 @@ function disableShowMore() {
 $('.show-more-btn').on('click', function() {
   clearCards();
   appendFromArray(getStorage());
-  disableShowMore()
+  disableShowMore();
+  showCompletedToDos();
 
 })
 
@@ -43,7 +53,28 @@ function Idea(title, body) {
   this.importanceArray = ['None', 'Low', 'Normal', 'High', 'Critical']
   this.importanceLevel = 0
   this.importance = this.importanceArray[this.importanceLevel];
+  this.completed = 'show';
 }
+
+$('.card-container').on('click', '.toggle-complete', function() {
+  var cardId = $(this).closest('.todo-card').attr('id');
+  var tempArray = getStorage()
+  $(this).closest('.todo-card').addClass('toggle-card-disabled');
+  updateCompleted(cardId, tempArray)
+  storeLocally(tempArray)
+})
+
+function updateCompleted(cardId, newArray) {
+  newArray.forEach(function(element, index, array) {
+    if (element.id == cardId) {
+      element.completed = 'toggle-card-disabled';
+    }
+  })
+}
+
+
+
+
 addCard = function() {
 var $title = $('.title-storage').val();
 var $body = $('.body-storage').val()
@@ -52,7 +83,7 @@ return idea
 }
 function prependCard(addCard) {
   $('.card-container').prepend(
-    `<article class="todo-card" id=${addCard.id}>
+    `<article class="todo-card ${addCard.completed}" id=${addCard.id}>
       <div class="searchable">
         <div class="card-header">
           <h2 contenteditable="true">${addCard.title}</h2>
