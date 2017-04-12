@@ -214,32 +214,32 @@ function enterKeyBody(toDoText, $cardId, newArray) {
   if (event.which == 13) {
     event.target.blur();
     updateBodyText(toDoText, $cardId, newArray);
-  }
+  }}
 
-function filterCards() {
-  var filterAttribute = $('.filter-btn').text()
-  var cards = getStorage()
-  cards = cards.filter( function(element, index) {
-  return element.importance.indexOf(filterAttribute) == -1
-  })
-  =element.forEach(function (element, index) {
-    $('#'+element.id)
-  })
-
-  // var searchResultsNeg = ideaArray.filter(function(idea) {
-  //   return idea.title.indexOf(searchText) == -1 &&
-  //   idea.body.indexOf(searchText) == -1 &&
-  //   idea.quality.indexOf(searchText) == -1
-  // })
-  // var searchResults = ideaArray.filter(function(idea) {
-  //   return idea.title.indexOf(searchText) != -1 ||
-  //   idea.body.indexOf(searchText) != -1 ||
-  //   idea.quality.indexOf(searchText) != -1
-  // })
-  // searchResultsNeg.forEach(function (idea, index) {
-  //   $('#'+idea.id).hide()
-  // })
-  // searchResults.forEach(function (idea, index) {
-  //   $('#'+idea.id).show()
-  // })
-}
+// function filterCards() {
+//   var filterAttribute = $('.filter-btn').text()
+//   var cards = getStorage()
+//   cards = cards.filter( function(element, index) {
+//   return element.importance.indexOf(filterAttribute) == -1
+//   })
+//   =element.forEach(function (element, index) {
+//     $('#'+element.id)
+//   })
+//
+//   // var searchResultsNeg = ideaArray.filter(function(idea) {
+//   //   return idea.title.indexOf(searchText) == -1 &&
+//   //   idea.body.indexOf(searchText) == -1 &&
+//   //   idea.quality.indexOf(searchText) == -1
+//   // })
+//   // var searchResults = ideaArray.filter(function(idea) {
+//   //   return idea.title.indexOf(searchText) != -1 ||
+//   //   idea.body.indexOf(searchText) != -1 ||
+//   //   idea.quality.indexOf(searchText) != -1
+//   // })
+//   // searchResultsNeg.forEach(function (idea, index) {
+//   //   $('#'+idea.id).hide()
+//   // })
+//   // searchResults.forEach(function (idea, index) {
+//   //   $('#'+idea.id).show()
+//   // })
+// }
