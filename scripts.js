@@ -129,7 +129,7 @@ function deleteObject(getStorage, $cardID, $card) {
       console.log(element)
       console.log(element.id, "made it past")
       console.log(array)
-      array.splice(element, 1)
+      newArray.splice(index, 1)
     }
     else {
       return newArray
