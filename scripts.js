@@ -1,16 +1,9 @@
 onPageLoad()
-// function onPageLoad() {
-//   appendFromArray(getStorage())
-// }
+
 function appendFromArray(getStorage) {
   getStorage.forEach(function (element) {
     prependCard(element)
   })
-}
-
-function onPageLoad() {
-  appendFromArray(getTenFromStorage(getStorage()))
-  hideCompletedToDos()
 }
 
 function getTenFromStorage(getStorage) {
@@ -25,6 +18,12 @@ function hideCompletedToDos() {
 function showCompletedToDos() {
   $('.toggle-card-disabled').show()
 }
+
+function onPageLoad() {
+  appendFromArray(getTenFromStorage(getStorage()))
+  hideCompletedToDos()
+}
+
 
 function disableShowMore() {
   $('.show-more-btn').hide()
@@ -56,13 +55,15 @@ function Idea(title, body) {
   this.completed = 'show';
 }
 
-$('.card-container').on('click', '.toggle-complete', function() {
+$('.card-container').on('click', '.toggle-complete', updateCompletedLocalStorage)
+
+function updateCompletedLocalStorage() {
   var cardId = $(this).closest('.todo-card').attr('id');
-  var tempArray = getStorage()
+  var tempArray = getStorage();
   $(this).closest('.todo-card').addClass('toggle-card-disabled');
-  updateCompleted(cardId, tempArray)
-  storeLocally(tempArray)
-})
+  updateCompleted(cardId, tempArray);
+  storeLocally(tempArray);
+}
 
 function updateCompleted(cardId, newArray) {
   newArray.forEach(function(element, index, array) {
@@ -71,9 +72,6 @@ function updateCompleted(cardId, newArray) {
     }
   })
 }
-
-
-
 
 addCard = function() {
 var $title = $('.title-storage').val();
