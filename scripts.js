@@ -42,6 +42,7 @@ function prependCard(addCard) {
         <button class="upvote-icon" type="button" name="upvote-btn"></button>
         <button class="downvote-icon" type="button" name="downvote-btn"></button>
         <p class="importance-text">${addCard.importance}</p>
+        <button class="toggle-complete"> Completed Task</button>
       </div>
     </article>`
   );
@@ -191,8 +192,6 @@ function updateTitleText(toDoText, cardId, newArray) {
   })
 }
 
-
-
 function saveEditsBody(event) {
     console.log(this);
     var toDoText = $(this).text();
@@ -216,4 +215,31 @@ function enterKeyBody(toDoText, $cardId, newArray) {
     event.target.blur();
     updateBodyText(toDoText, $cardId, newArray);
   }
+
+function filterCards() {
+  var filterAttribute = $('.filter-btn').text()
+  var cards = getStorage()
+  cards = cards.filter( function(element, index) {
+  return element.importance.indexOf(filterAttribute) == -1
+  })
+  =element.forEach(function (element, index) {
+    $('#'+element.id)
+  })
+
+  // var searchResultsNeg = ideaArray.filter(function(idea) {
+  //   return idea.title.indexOf(searchText) == -1 &&
+  //   idea.body.indexOf(searchText) == -1 &&
+  //   idea.quality.indexOf(searchText) == -1
+  // })
+  // var searchResults = ideaArray.filter(function(idea) {
+  //   return idea.title.indexOf(searchText) != -1 ||
+  //   idea.body.indexOf(searchText) != -1 ||
+  //   idea.quality.indexOf(searchText) != -1
+  // })
+  // searchResultsNeg.forEach(function (idea, index) {
+  //   $('#'+idea.id).hide()
+  // })
+  // searchResults.forEach(function (idea, index) {
+  //   $('#'+idea.id).show()
+  // })
 }
