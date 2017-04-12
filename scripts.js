@@ -40,15 +40,19 @@ return idea
 function prependCard(addCard) {
   $('.card-container').prepend(
     `<article class="todo-card" id=${addCard.id}>
-      <div class="card-header">
-        <h2 class="searchable" contenteditable="true">${addCard.title}</h2>
-        <button class="delete-icon" type="button" name="delete-button"></button>
+      <div class="searchable">
+        <div class="card-header">
+          <h2 contenteditable="true">${addCard.title}</h2>
+          <button class="delete-icon" type="button" name="delete-button"></button>
+        </div>
+        <p class="body-text" contenteditable="true">${addCard.body}</p>
       </div>
-      <p class="body-text searchable" contenteditable="true">${addCard.body}</p>
       <div class="quality-container">
         <button class="upvote-icon" type="button" name="upvote-btn"></button>
         <button class="downvote-icon" type="button" name="downvote-btn"></button>
-        <span class="check-item"> Task Complete? <input class="complete" type="checkbox"> </span>
+        <span class="check-item">
+          <button class="complete" type="checkbox"> Completed Task </button>
+        </span>
         <p class="quality-text">${addCard.importance}</p>
       </div>
     </article>`
@@ -162,15 +166,15 @@ $('.card-container').on('click', '.delete-icon', deleteCard)
 
 $('.search-input').on('input', searchCards)
 
+$('.search-input').on('input', searchCards)
 function searchCards() {
-  var something = $(this)
   var searchInput = $('.search-input').val().toLowerCase();
   $('.searchable').each(function() {
     var cardText = $(this).text().toLowerCase();
     if (cardText.indexOf(searchInput) != -1) {
-      $(this).parent().show();
+      $(this).closest('.todo-card').show();
     } else {
-      $(this).parent().hide();
+      $(this).closest('.todo-card').hide();
     }
   })
 }
