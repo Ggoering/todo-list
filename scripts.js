@@ -1,26 +1,20 @@
 onPageLoad()
-
 function onPageLoad() {
   appendFromArray(getStorage())
 }
-
 function appendFromArray(getStorage) {
   getStorage.forEach(function (element) {
     prependCard(element)
   })
 }
-
 $('header').on('input', '.body-storage, .title-storage', enableSave)
-
 $('.save-btn').on('click', saveCard)
 $('.save-btn').on('click', clearInputFields)
 $('.save-btn').on('click', enableSave)
-
 function saveCard() {
 storeLocally(updateCardArray(getStorage(), addCard()));
 prependCard(addCard());
 }
-
 function Idea(title, body) {
   this.title = title;
   this.body = body;
@@ -29,54 +23,47 @@ function Idea(title, body) {
   this.importanceLevel = 0
   this.importance = this.importanceArray[this.importanceLevel];
 }
-
 addCard = function() {
 var $title = $('.title-storage').val();
 var $body = $('.body-storage').val()
 var idea = new Idea($title, $body)
 return idea
 }
-
 function prependCard(addCard) {
   $('.card-container').prepend(
     `<article class="todo-card" id=${addCard.id}>
-      <div class="card-header">
-        <h2 class="searchable" contenteditable="true">${addCard.title}</h2>
-        <button class="delete-icon" type="button" name="delete-button"></button>
-      </div>
-      <p class="body-text searchable" contenteditable="true">${addCard.body}</p>
+      <div class="searchable">
+        <div class="card-header">
+          <h2 contenteditable="true">${addCard.title}</h2>
+          <button class="delete-icon" type="button" name="delete-button"></button>
+        </div>
+        <p class="body-text" contenteditable="true">${addCard.body}</p>
       <div class="quality-container">
         <button class="upvote-icon" type="button" name="upvote-btn"></button>
         <button class="downvote-icon" type="button" name="downvote-btn"></button>
-        <span class="check-item"> Task Complete? <input class="complete" type="checkbox"> </span>
         <p class="quality-text">${addCard.importance}</p>
       </div>
     </article>`
   );
 }
-
 function getStorage() {
   var getItem =  localStorage.getItem('key') || '[]'
   getItem = JSON.parse(getItem)
   return getItem
 }
-
 function updateCardArray(getStorage, addCard) {
   var getStorage1 = getStorage
   getStorage1.push(addCard)
   return getStorage1
 }
-
 function storeLocally(updateCardArray) {
   var stringifiedArray = JSON.stringify(updateCardArray);
   localStorage.setItem('key', stringifiedArray);
 }
-
 function clearInputFields() {
   $('.title-storage').val('');
   $('.body-storage').val('');
 }
-
 function enableSave() {
   var $title = $('.title-storage').val();
   var $body = $('.body-storage').val();
@@ -86,13 +73,10 @@ function enableSave() {
     toggleSaveDisable(true);
   }
 }
-
 function toggleSaveDisable(value) {
   $('.save-btn').prop('disabled', value);
 }
-
 $('.card-container').on('click', '.upvote-icon', upVote)
-
 function upVote() {
   var $cardID = $(this).closest('.todo-card').attr('id')
   var $upBtn = $(this)
@@ -100,7 +84,6 @@ function upVote() {
   clearCards()
   appendFromArray(getStorage())
 }
-
 function increaseImportanceArray(getStorage, $cardID) {
 var tempArray = getStorage
 for (var i = 0; i < tempArray.length; i++) {
@@ -113,9 +96,7 @@ for (var i = 0; i < tempArray.length; i++) {
 }
 return tempArray
 }
-
 $('.card-container').on('click', '.downvote-icon', downVote)
-
 function downVote() {
   var $cardID = $(this).closest('.todo-card').attr('id')
   var $upBtn = $(this)
@@ -145,7 +126,13 @@ function deleteObject(getStorage, $cardID, $card) {
   var newArray = getStorage
   newArray.forEach(function(element, index, array) {
     if (element.id == $cardID) {
-      array.splice(element)
+      console.log(element)
+      console.log(element.id, "made it past")
+      console.log(array)
+      array.splice(element, 1)
+    }
+    else {
+      return newArray
     }
   })
   $($card).remove()
@@ -153,7 +140,6 @@ function deleteObject(getStorage, $cardID, $card) {
 }
 
 $('.card-container').on('click', '.delete-icon', deleteCard)
-
   function deleteCard() {
   var $cardID = $(this).closest('.todo-card').attr('id')
   var $card = $(this).closest('.todo-card')
@@ -161,7 +147,6 @@ $('.card-container').on('click', '.delete-icon', deleteCard)
 }
 
 $('.search-input').on('input', searchCards)
-
 function searchCards() {
   var something = $(this)
   var searchInput = $('.search-input').val().toLowerCase();
