@@ -147,6 +147,7 @@ $('.card-container').on('click', '.delete-icon', deleteCard)
 }
 
 $('.search-input').on('input', searchCards)
+
 function searchCards() {
   var something = $(this)
   var searchInput = $('.search-input').val().toLowerCase();
@@ -161,24 +162,58 @@ function searchCards() {
 }
 
 
-$('.card-container').on('keyup', 'h2', function(event) {
-  console.log(this);
-  var toDoText = $(this).text();
-  var $cardId = $(this).closest('.todo-card').attr('id');
-  var newArray = getStorage();
+$('.card-container').on('keyup', 'h2', saveEditsTitle)
+$('.card-container').on('keyup', 'p', saveEditsBody)
+
+
+function saveEditsTitle(event) {
+    console.log(this);
+    var toDoText = $(this).text();
+    var $cardId = $(this).closest('.todo-card').attr('id');
+    var newArray = getStorage();
+    enterKeyTitle(toDoText, $cardId, newArray)
+    storeLocally(newArray)
+}
+
+function enterKeyTitle(toDoText, $cardId, newArray) {
   if (event.which == 13) {
     event.target.blur();
-    updateTitle(toDoText, $cardId, newArray);
+    updateTitleText(toDoText, $cardId, newArray);
   }
-  storeLocally(newArray)
-})
+}
 
-
-function updateTitle(toDoText, cardId, newArray) {
+function updateTitleText(toDoText, cardId, newArray) {
   newArray.forEach(function(element, index, array) {
     if (element.id == cardId) {
       element.title = toDoText;
       console.log(element);
     }
   })
+}
+
+
+
+function saveEditsBody(event) {
+    console.log(this);
+    var toDoText = $(this).text();
+    var $cardId = $(this).closest('.todo-card').attr('id');
+    var newArray = getStorage();
+    enterKeyBody(toDoText, $cardId, newArray)
+    storeLocally(newArray)
+}
+
+function updateBodyText(toDoText, cardId, newArray) {
+  newArray.forEach(function(element, index, array) {
+    if (element.id == cardId) {
+      element.body = toDoText;
+      console.log(element);
+    }
+  })
+}
+
+function enterKeyBody(toDoText, $cardId, newArray) {
+  if (event.which == 13) {
+    event.target.blur();
+    updateBodyText(toDoText, $cardId, newArray);
+  }
 }
