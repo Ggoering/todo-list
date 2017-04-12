@@ -159,3 +159,26 @@ function searchCards() {
     }
   })
 }
+
+
+$('.card-container').on('keyup', 'h2', function(event) {
+  console.log(this);
+  var toDoText = $(this).text();
+  var $cardId = $(this).closest('.todo-card').attr('id');
+  var newArray = getStorage();
+  if (event.which == 13) {
+    event.target.blur();
+    updateTitle(toDoText, $cardId, newArray);
+  }
+  storeLocally(newArray)
+})
+
+
+function updateTitle(toDoText, cardId, newArray) {
+  newArray.forEach(function(element, index, array) {
+    if (element.id == cardId) {
+      element.title = toDoText;
+      console.log(element);
+    }
+  })
+}
