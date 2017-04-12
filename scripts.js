@@ -1,12 +1,33 @@
 onPageLoad()
-function onPageLoad() {
-  appendFromArray(getStorage())
-}
+// function onPageLoad() {
+//   appendFromArray(getStorage())
+// }
 function appendFromArray(getStorage) {
   getStorage.forEach(function (element) {
     prependCard(element)
   })
 }
+
+function onPageLoad() {
+  appendFromArray(getTenFromStorage(getStorage()))
+}
+
+function getTenFromStorage(getStorage) {
+  var arrayTen = getStorage.slice(0,10);
+  return arrayTen
+}
+
+function disableShowMore() {
+  $('.show-more-btn').hide()
+}
+
+$('.show-more-btn').on('click', function() {
+  clearCards();
+  appendFromArray(getStorage());
+  disableShowMore()
+
+})
+
 $('header').on('input', '.body-storage, .title-storage', enableSave)
 $('.save-btn').on('click', saveCard)
 $('.save-btn').on('click', clearInputFields)
@@ -98,6 +119,7 @@ for (var i = 0; i < tempArray.length; i++) {
 return tempArray
 }
 $('.card-container').on('click', '.downvote-icon', downVote)
+
 function downVote() {
   var $cardID = $(this).closest('.todo-card').attr('id')
   var $upBtn = $(this)

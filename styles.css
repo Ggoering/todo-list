@@ -127,6 +127,17 @@ article {
   margin: 20px 0;
 }
 
+.show-more-btn {
+  width: 120px;
+  height: 40px;
+  margin: 20px 0;
+  border: none;
+  background-color: #00A79D;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
 h2 {
   width: 90%;
   color: #6D6E71;
@@ -242,6 +253,8 @@ font-size: 14px;
   background-color: #00A79D;
   color: #FFFFFF;
 }
+
+
 
 @media(min-width: 600px) {
   input,
