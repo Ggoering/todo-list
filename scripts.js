@@ -38,10 +38,10 @@ function prependCard(addCard) {
           <button class="delete-icon" type="button" name="delete-button"></button>
         </div>
         <p class="body-text" contenteditable="true">${addCard.body}</p>
-      <div class="quality-container">
+      <div class="importance-container">
         <button class="upvote-icon" type="button" name="upvote-btn"></button>
         <button class="downvote-icon" type="button" name="downvote-btn"></button>
-        <p class="quality-text">${addCard.importance}</p>
+        <p class="importance-text">${addCard.importance}</p>
       </div>
     </article>`
   );

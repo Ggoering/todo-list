@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Idea Box</title>
+    <title>2DO Box</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
@@ -11,33 +11,17 @@
   </head>
   <body>
     <header>
-      <h1 role="banner">idea<span class="other-color">box</span></h1>
+      <h1 role="banner">2DO<span class="other-color">box</span></h1>
       <input class="title-storage" type="text" name="title" placeholder="Title" aria-required="true">
-      <textarea class="body-storage" rows="1" name="body" placeholder="Body" aria-required="true"></textarea>
+      <textarea class="body-storage" rows="1" name="body" placeholder="Task" aria-required="true"></textarea>
       <input class="save-btn" type="submit" name="save" value="save" disabled >
     </header>
     <main role="main">
       <input class="search-input" role="search" type="text" name="search-box" placeholder="Search">
       <section class="card-container">
-        <!-- <article class="todo-card" id="9087">
-          <div class="card-header">
-            <h2 class="searchable" contenteditable="true">DUMMY TITLE</h2>
-            <button class="delete-icon" type="button" name="delete-button"></button>
-          </div>
-          <p class="body-text searchable" contenteditable="true">JUST CHECKING THINGS OUT</p>
-          <div class="quality-container">
-            <button class="upvote-icon" type="button" name="upvote-btn"></button>
-            <button class="downvote-icon" type="button" name="downvote-btn"></button>
-            <p class="quality-text">None</p>
-            <span class="check-item">
-              <button class="complete" type="checkbox"> Completed Task </button>
-            </span>
-          </div>
-        </article> -->
       </section>
     </main>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- <script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script> -->
     <script src="scripts.js"></script>
   </body>
 </html>
