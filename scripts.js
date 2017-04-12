@@ -213,7 +213,6 @@ function searchCards() {
   })
 }
 
-
 $('.card-container').on('keyup', 'h2', saveEditsTitle)
 $('.card-container').on('keyup', 'p', saveEditsBody)
 
@@ -267,26 +266,46 @@ function enterKeyBody(toDoText, $cardId, newArray) {
     updateBodyText(toDoText, $cardId, newArray);
   }}
 
-$('main').on('click', '.filter-btn', filterCards)
+var cardsNeg = 1
 
-function filterCards() {
-  var filterAttribute = $(this).text()
-  var cards = getStorage()
-  cards = cards.filter( function(element, index) {
-  return element.importance.indexOf(filterAttribute) == -1
-  })
-  cards.forEach(function (element, index) {
-    $('#'+element.id).hide()
-  })
-}
+  $('main').on('click', '.filter-btn', function() {
+    $(this).toggleClass("filter-btn-clicked", true)
+    if (cardsNeg === 1) {
+      filterCards()
+      }
+      else {
+      filterCards2()
+      }
+      })
 
-  // function unFilterCards() {
-  //   var filterAttribute = $('.filter-btn').text()
-  //   var cards = getStorage()
-  //   cards = cards.filter( function(element, index) {
-  //   return element.importance.indexOf(filterAttribute) != -1
-  //   })
-  //   cards.forEach(function (element, index) {
-  //     $('#'+element.id).show()
-  //   })
-  // }
+  function filterCards() {
+    var thisButton = event.target
+    var filterAttribute = $(thisButton).text()
+    var cards = getStorage()
+    cardsNeg = cards.filter(function(element, index) {
+    return element.importance.indexOf(filterAttribute) == -1
+    })
+    cardsNeg.forEach(function (element, index){
+      $('#'+element.id).hide()
+    })}
+
+  function filterCards2() {
+    var thisButton = event.target
+    var filterAttribute = $(thisButton).text()
+    var cardsPos = cardsNeg.filter(function(element, index) {
+      return element.importance.indexOf(filterAttribute) != -1
+    })
+    cardsPos.forEach(function (element, index) {
+      $('#'+element.id).show()
+    })
+  }
+
+$('main').on('click', '.remove-filters-btn', removeFilters)
+
+  function removeFilters() {
+    var cards = getStorage()
+    cards.forEach(function (element, index) {
+      $('#'+element.id).show()
+    })
+    $('.filter-btn').toggleClass('filter-btn-clicked', false)
+  }

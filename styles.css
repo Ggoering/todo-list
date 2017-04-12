@@ -233,7 +233,7 @@ font-family: 'Open Sans', sans-serif;
 font-size: 14px;
 }
 
-.filter-btn {
+.filter-btn, .remove-filters-btn {
   width: 60px;
   height: 20px;
   margin-right: 10px;
@@ -244,10 +244,20 @@ font-size: 14px;
   color: #6D6E71
 }
 
+.remove-filters-btn {
+  width: 120px;
+}
+
+.remove-filters-btn:hover {
+  background-color: #00A79D;
+  color: #FFFFFF;
+}
+
 .filter-btn:hover {
   background-color: #00A79D;
   color: #FFFFFF;
 }
+
 
 .filter-btn-clicked {
   background-color: #00A79D;
